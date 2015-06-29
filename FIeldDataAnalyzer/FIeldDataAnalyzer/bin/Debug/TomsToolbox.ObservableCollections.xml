@@ -1,0 +1,550 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TomsToolbox.ObservableCollections</name>
+    </assembly>
+    <members>
+        <member name="T:TomsToolbox.ObservableCollections.FilteredObservableCollection`1">
+            <summary>
+            A simple filtered collection implementation.<para/>
+            This collection contains only the items from the source collection passing the filter. 
+            Changes in the source collection will be tracked, however changes in the individual objects that would affect the filter will not be tracked.
+            Changes that affect only the items order in the source collection (see <see cref="F:System.Collections.Specialized.NotifyCollectionChangedAction.Move"/>) will be ignored.
+            </summary>
+            <typeparam name="T">Type of the items in the collection.</typeparam>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.FilteredObservableCollection`1.#ctor(System.Collections.ObjectModel.ObservableCollection{`0},System.Func{`0,System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.FilteredObservableCollection`1"/> class.
+            </summary>
+            <param name="sourceCollection">The source collection.</param>
+            <param name="filter">The filter.</param>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.FilteredObservableCollection`1.CollectionChanged">
+            <summary>
+            Occurs when collection has changed.
+            </summary>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.IObservableCollection`1">
+            <summary>
+            Combines <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/> and <see cref="T:System.ComponentModel.INotifyPropertyChanged"/> into a single interface.
+            </summary>
+            <typeparam name="T">The type of elements in the list.</typeparam>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.ObservablePropertyChangeTracker`1">
+            <summary>
+            Tracks <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> events of all items in an observable collection.
+            </summary>
+            <typeparam name="T">The type of the items in the collection.</typeparam>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservablePropertyChangeTracker`1.#ctor(TomsToolbox.ObservableCollections.IObservableCollection{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservablePropertyChangeTracker`1"/> class.
+            </summary>
+            <param name="collection">The collection.</param>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservablePropertyChangeTracker`1.#ctor(System.Collections.ObjectModel.ObservableCollection{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservablePropertyChangeTracker`1"/> class.
+            </summary>
+            <param name="collection">The collection.</param>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.ObservablePropertyChangeTracker`1.ItemPropertyChanged">
+            <summary>
+            Occurs when the property of any item has changed. The sender in the event is the item that has changed, not this instance.
+            </summary>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.ObservableListAdapter`1">
+            <summary>
+            Adapter to return an <see cref="T:System.Collections.IList"/> from an <see cref="T:System.Collections.Generic.IList`1"/>.<para/>
+            Most objects that implement <see cref="T:System.Collections.Generic.IList`1"/> also implement <see cref="T:System.Collections.IList"/>, 
+            however <see cref="T:System.Collections.Generic.IList`1"/> does not derive from <see cref="T:System.Collections.IList"/>, so if you get 
+            only an interface and don't know the object behind the <see cref="T:System.Collections.Generic.IList`1"/>, its not safe to directly cast to <see cref="T:System.Collections.IList"/>.
+            This object provides a wrapper that handles the transition from <see cref="T:System.Collections.Generic.IList`1"/> to <see cref="T:System.Collections.IList"/>, preserving observable events.
+            Use e.g. for ListCollectionView to feed it with an <see cref="T:TomsToolbox.ObservableCollections.IObservableCollection`1"/>.
+            </summary>
+            <typeparam name="T">The type of elements in the list.</typeparam>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.#ctor(System.Collections.Generic.IList{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableListAdapter`1"/> class.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.IEnumerator"/> object that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.CopyTo(System.Array,System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.ICollection"/> to an <see cref="T:System.Array"/>, starting at a particular <see cref="T:System.Array"/> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"/> that is the destination of the elements copied from <see cref="T:System.Collections.ICollection"/>. The <see cref="T:System.Array"/> must have zero-based indexing. </param><param name="index">The zero-based index in <paramref name="array"/> at which copying begins. </param><exception cref="T:System.ArgumentNullException"><paramref name="array"/> is null. </exception><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is less than zero. </exception><exception cref="T:System.ArgumentException"><paramref name="array"/> is multidimensional.-or- The number of elements in the source <see cref="T:System.Collections.ICollection"/> is greater than the available space from <paramref name="index"/> to the end of the destination <paramref name="array"/>.-or-The type of the source <see cref="T:System.Collections.ICollection"/> cannot be cast automatically to the type of the destination <paramref name="array"/>.</exception>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.Add(System.Object)">
+            <summary>
+            Adds an item to the <see cref="T:System.Collections.IList"/>.
+            </summary>
+            <returns>
+            The position into which the new element was inserted, or -1 to indicate that the item was not inserted into the collection,
+            </returns>
+            <param name="value">The object to add to the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.Contains(System.Object)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.IList"/> contains a specific value.
+            </summary>
+            <returns>
+            true if the <see cref="T:System.Object"/> is found in the <see cref="T:System.Collections.IList"/>; otherwise, false.
+            </returns>
+            <param name="value">The object to locate in the <see cref="T:System.Collections.IList"/>. </param>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.Clear">
+            <summary>
+            Removes all items from the <see cref="T:System.Collections.IList"/>.
+            </summary>
+            <exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only. </exception>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.IndexOf(System.Object)">
+            <summary>
+            Determines the index of a specific item in the <see cref="T:System.Collections.IList"/>.
+            </summary>
+            <returns>
+            The index of <paramref name="value"/> if found in the list; otherwise, -1.
+            </returns>
+            <param name="value">The object to locate in the <see cref="T:System.Collections.IList"/>. </param>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.Insert(System.Int32,System.Object)">
+            <summary>
+            Inserts an item to the <see cref="T:System.Collections.IList"/> at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which <paramref name="value"/> should be inserted. </param><param name="value">The object to insert into the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception><exception cref="T:System.NullReferenceException"><paramref name="value"/> is null reference in the <see cref="T:System.Collections.IList"/>.</exception>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.Remove(System.Object)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.IList"/>.
+            </summary>
+            <param name="value">The object to remove from the <see cref="T:System.Collections.IList"/>. </param><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableListAdapter`1.RemoveAt(System.Int32)">
+            <summary>
+            Removes the <see cref="T:System.Collections.IList"/> item at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the item to remove. </param><exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>. </exception><exception cref="T:System.NotSupportedException">The <see cref="T:System.Collections.IList"/> is read-only.-or- The <see cref="T:System.Collections.IList"/> has a fixed size. </exception>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableListAdapter`1.Count">
+            <summary>
+            Gets the number of elements contained in the <see cref="T:System.Collections.ICollection"/>.
+            </summary>
+            <returns>
+            The number of elements contained in the <see cref="T:System.Collections.ICollection"/>.
+            </returns>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableListAdapter`1.SyncRoot">
+            <summary>
+            Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+            </summary>
+            <returns>
+            An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+            </returns>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableListAdapter`1.IsSynchronized">
+            <summary>
+            Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
+            </summary>
+            <returns>
+            true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.
+            </returns>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableListAdapter`1.Item(System.Int32)">
+            <summary>
+            Gets or sets the element at the specified index.
+            </summary>
+            <returns>
+            The element at the specified index.
+            </returns>
+            <param name="index">The zero-based index of the element to get or set. </param>
+            <exception cref="T:System.ArgumentOutOfRangeException"><paramref name="index"/> is not a valid index in the <see cref="T:System.Collections.IList"/>.</exception>
+            <exception cref="T:System.NotSupportedException">The property is set and the <see cref="T:System.Collections.IList"/> is read-only. </exception>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableListAdapter`1.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.IList"/> is read-only.
+            </summary>
+            <returns>
+            true if the <see cref="T:System.Collections.IList"/> is read-only; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableListAdapter`1.IsFixedSize">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.IList"/> has a fixed size.
+            </summary>
+            <returns>
+            true if the <see cref="T:System.Collections.IList"/> has a fixed size; otherwise, false.
+            </returns>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.ObservableListAdapter`1.CollectionChanged">
+            <summary>
+            Occurs when the collection changes.
+            </summary>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.ObservableListAdapter`1.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.ObservableCompositeCollection">
+            <summary>
+            Factory methods for the <see cref="T:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1"/>
+            </summary>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection.FromSingleItem``1(``0)">
+            <summary>
+            Create a collection initially containing one single item
+            </summary>
+            <typeparam name="T">The type of elements in the list.</typeparam>
+            <param name="singleItem">The first single item in the collection</param>
+            <returns>A new <see cref="T:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1"/> containing one fixed list with one single item.</returns>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection.FromSingleItemAndList``2(``0,System.Collections.Generic.IList{``1})">
+            <summary>
+            Create a collection initially containing one single item plus one list.
+            </summary>
+            <typeparam name="T">The type of the single item.</typeparam>
+            <typeparam name="TItem">The type of elements in the list.</typeparam>
+            <param name="singleItem">The first single item in the collection</param>
+            <param name="list">The list to add after the single item.</param>
+            <returns>A new <see cref="T:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1"/> containing one fixed list with the single item plus all items from the list.</returns>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection.FromListAndSingleItem``2(System.Collections.Generic.IList{``0},``1)">
+            <summary>
+            Create a collection initially containing one list plus one single item.
+            </summary>
+            <typeparam name="T">The type of the single item.</typeparam>
+            <typeparam name="TItem">The type of elements in the list.</typeparam>
+            <param name="list">The list to add before the single item.</param>
+            <param name="singleItem">The last single item in the collection</param>
+            <returns>A new <see cref="T:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1"/> containing all items from the list plus one fixed list with the single item at the end.</returns>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1">
+            <summary>
+            View a set of collections as one continuous list.
+            <para/>
+            Similar to the System.Windows.Data.CompositeCollection, plus:
+            <list type="bullet">
+            <item>Generic type</item>
+            <item>Transparent separation of the real content and the resulting list</item>
+            <item>Nestable, i.e. composite collections of composite collections</item>
+            </list>
+            </summary>
+            <typeparam name="T">Type of the items in the collection</typeparam>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.#ctor">
+            <summary>
+            Create an empty collection
+            </summary>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.#ctor(System.Collections.Generic.IList{`0}[])">
+            <summary>
+            Create a collection initially wrapping a set of lists
+            </summary>
+            <param name="parts">The lists to wrap</param>
+            <exception cref="T:System.ArgumentException">None of the parts may be null!</exception>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.ReadOnlyNotSupported">
+            <summary>
+            General handling for all interface functions not supported because we are read only.
+            </summary>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>
+            A <see cref="T:System.Collections.Generic.IEnumerator`1"></see> that can be used to iterate through the collection.
+            </returns>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.IndexOf(`0)">
+            <summary>
+            Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"></see>.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1"></see>.</param>
+            <returns>
+            The index of item if found in the list; otherwise, -1.
+            </returns>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.Contains(`0)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"></see>.</param>
+            <returns>
+            true if item is found in the <see cref="T:System.Collections.Generic.ICollection`1"></see>; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.Content">
+            <summary>
+            Access to the physical layer of the content
+            </summary>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.Item(System.Int32)">
+            <summary>
+            Gets the element at the specified index.
+            </summary>
+            <returns>The element at the specified index.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">index is not a valid index in the <see cref="T:System.Collections.Generic.IList`1"></see>.</exception>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.Count">
+            <summary>
+            Gets the number of elements contained in the collection.
+            </summary>
+            <returns>The number of elements contained in the collection.</returns>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> is read-only.
+            </summary>
+            <returns>true if the <see cref="T:System.Collections.Generic.ICollection`1"></see> is read-only; otherwise, false.</returns>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.System#Collections#IList#IsFixedSize">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.IList"/> has a fixed size.
+            </summary>
+            <returns>true if the <see cref="T:System.Collections.IList"/> has a fixed size; otherwise, false.</returns>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.System#Collections#ICollection#IsSynchronized">
+            <summary>
+            Gets a value indicating whether access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe).
+            </summary>
+            <returns>true if access to the <see cref="T:System.Collections.ICollection"/> is synchronized (thread safe); otherwise, false.</returns>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.System#Collections#ICollection#SyncRoot">
+            <summary>
+            Gets an object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.
+            </summary>
+            <returns>An object that can be used to synchronize access to the <see cref="T:System.Collections.ICollection"/>.</returns>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.CollectionChanged">
+            <summary>
+            Occurs when the collection changes.
+            </summary>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.ObservableCompositeCollection`1.ContentManager">
+            <summary>
+            Taking care of the physical content
+            </summary>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.ObservableExtensions">
+            <summary>
+            Extension methods for some observable patterns.
+            </summary>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableExtensions.ObservableSelectMany``2(System.Collections.Generic.IList{``0},System.Linq.Expressions.Expression{System.Func{``0,System.Collections.Generic.IList{``1}}})">
+            <summary>
+            Projects each element of a sequence to an <see cref="T:System.Collections.Generic.IList`1"/>,
+            flattens the resulting sequences into one sequence, and invokes a result selector function on each element therein.
+            If the source is an observable collection, the resulting sequence will track the changes.
+            </summary>
+            <returns>
+            An <see cref="T:System.Collections.Generic.IList`1"/> whose elements are the result of invoking the one-to-many transform function defined by <paramref name="itemGeneratorExpression"/>
+            on each element of <paramref name="source"/> and then mapping each of those sequence elements and their corresponding source element to a result element.
+            </returns>
+            <param name="source">A sequence of values to project.</param>
+            <param name="itemGeneratorExpression">A property expression of a transform function to apply to each element of the intermediate sequence.</param>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <typeparam name="TTarget">The type of the elements of the resulting sequence.</typeparam>
+            <remarks>
+            The selector must aways return the same object for the source, else removing elements will fail!
+            </remarks>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableExtensions.ObservableSelect``2(System.Collections.Generic.IList{``0},System.Linq.Expressions.Expression{System.Func{``0,``1}})">
+            <summary>
+            Projects each element of a sequence into a new form.
+            </summary>
+            <returns>
+            An observable <see cref="T:System.Collections.Generic.IList`1"/> whose elements are the result of invoking the transform function on each element of <paramref name="source"/>.
+            </returns>
+            <param name="source">A sequence of values to invoke a transform function on.</param>
+            <param name="itemGeneratorExpression">An expression that describes the transform function to apply to each element.</param>
+            <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
+            <typeparam name="TTarget">The type of the value returned by the transform function compiled from <paramref name="itemGeneratorExpression"/>.</typeparam>
+            <remarks>
+            If source is observable, i.e. implements <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/>, the returned collection is observable, too.
+            <para/>
+            If the <paramref name="itemGeneratorExpression"/> is a property expression like "item =&gt; item.SomeProperty" and <typeparamref name="TSource"/>
+            implements <see cref="T:System.ComponentModel.INotifyPropertyChanged"/>, the returned collection will be updated when any items property changes.
+            </remarks>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableExtensions.ObservableCast``1(System.Collections.IEnumerable)">
+            <summary>
+            Returns an observable collection of objects of type <typeparamref name="TTarget"/> that mirrors the source collection.
+            </summary>
+            <typeparam name="TTarget">The type of the target elements.</typeparam>
+            <param name="source">The source collection.</param>
+            <returns>The observable collection of objects of type <typeparamref name="TTarget"/> that mirrors the source collection.</returns>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2">
+            <summary>
+            A read only observable collection of type TTarget where TTarget is a wrapper for type TSource.
+            </summary>
+            <typeparam name="TSource">The type of elements in the source collection.</typeparam>
+            <typeparam name="TTarget">The type of elements in the wrapped collection.</typeparam>
+            <remarks>
+            This collection does <c>not</c> hold a reference to the source collection. 
+            To keep the source collection alive, the object generating the <see cref="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2"/> must hold a reference to the source collection.
+            </remarks>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2">
+            <summary>
+            Similar to the <see cref="T:System.Collections.ObjectModel.ReadOnlyObservableCollection`1"/>, except it does not require the items
+            collection to be an <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> but only an <see cref="T:System.Collections.Generic.IList`1"/> that implements also INotifyCollectionChanged.
+            </summary>
+            <typeparam name="T">The type of elements in the list.</typeparam>
+            <typeparam name="TList">The type of the list to wrap.</typeparam>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2"/> class.
+            </summary>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2.#ctor(`1)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2"/> class.
+            </summary>
+            <param name="items">The items.</param>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2.OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/> event.
+            </summary>
+            <param name="e">The <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2.OnCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Raises the <see cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged"/> event.
+            </summary>
+            <param name="e">The <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2.Items">
+            <summary>
+            Returns the collection that the <see cref="T:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2"/> wraps.
+            </summary>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2.CollectionChanged">
+            <summary>
+            Occurs when the collection changes.
+            </summary>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.ReadOnlyObservableCollectionAdapter`2.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2.#ctor(System.Collections.IEnumerable,System.Func{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2"/> class.
+            </summary>
+            <param name="sourceCollection">The source collection to wrap.</param>
+            <param name="itemGenerator">The item generator to generate the wrapper for each item.</param>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2.OnSourceCollectionChanged(System.Collections.IEnumerable,System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
+            <summary>
+            Called when the source collection has changed.
+            </summary>
+            <param name="sourceCollection">The source collection.</param>
+            <param name="e">The <see cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
+            <exception cref="T:System.ArgumentException">Event source must provide index!</exception>
+            <exception cref="T:System.NotImplementedException">Moving more than one item is not supported</exception>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2.Finalize">
+            <summary>
+            Finalizes an instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2"/> class.
+            </summary>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2.ItemGenerator">
+            <summary>
+            Gets the item generator used to generate the wrapper for each item.
+            </summary>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2.CollectionChanged">
+            <summary>
+            Occurs when the collection has changed.
+            </summary>
+        </member>
+        <member name="E:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2.PropertyChanged">
+            <summary>
+            Occurs when a property has changed.
+            </summary>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableExtensions.ObservableSelectImpl`2.#ctor(System.Collections.Generic.IList{`0},System.Linq.Expressions.Expression{System.Func{`0,`1}})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableWrappedCollection`2"/> class.
+            </summary>
+            <param name="sourceCollection">The source collection to wrap.</param>
+            <param name="itemGeneratorExpression">The item generator to generate the wrapper for each item.</param>
+        </member>
+        <member name="T:TomsToolbox.ObservableCollections.ObservableIndexer`2">
+            <summary>
+            A Dictionary like implementation that populates it's content on demand, i.e. calling indexer[key] will never return null.
+            </summary>
+            <typeparam name="TKey">The type of the key.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableIndexer`2.#ctor(System.Func{`0,`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableIndexer`2"/> class.
+            </summary>
+            <param name="generator">The generator.</param>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableIndexer`2.#ctor(System.Func{`0,`1},System.Collections.Generic.IEqualityComparer{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.ObservableCollections.ObservableIndexer`2"/> class.
+            </summary>
+            <param name="generator">The generator.</param>
+            <param name="comparer">The comparer.</param>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableIndexer`2.Remove(`0)">
+            <summary>
+            Removes the value with the specified key from the <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            </summary>
+            <returns>
+            true if the element is successfully found and removed; otherwise, false.  This method returns false if <paramref name="key"/> is not found in the <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            </returns>
+            <param name="key">The key of the element to remove.</param><exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
+        </member>
+        <member name="M:TomsToolbox.ObservableCollections.ObservableIndexer`2.Clear">
+            <summary>
+            Removes all keys and values from the <see cref="T:System.Collections.Generic.Dictionary`2"/>.
+            </summary>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableIndexer`2.Item(`0)">
+            <summary>
+            Gets the value associated with the specified key.
+            </summary>
+            <param name="key">The key of the value to get or set.</param>
+            <returns>
+            The value associated with the specified key. If the specified key is not found, or the value at the key is null,
+            the item generator is called to create a new element with the specified key.
+            </returns>
+            <exception cref="T:System.InvalidOperationException">The generator did not generate a valid item.</exception>
+            <exception cref="T:System.ArgumentNullException"><paramref name="key"/> is null.</exception>
+        </member>
+        <member name="P:TomsToolbox.ObservableCollections.ObservableIndexer`2.Comparer">
+            <summary>
+            Gets the <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> that is used to determine equality of keys for the dictionary.
+            </summary>
+            <returns>
+            The <see cref="T:System.Collections.Generic.IEqualityComparer`1"/> generic interface implementation that is used to determine equality of keys for the current <see cref="T:System.Collections.Generic.Dictionary`2"/> and to provide hash values for the keys.
+            </returns>
+        </member>
+    </members>
+</doc>

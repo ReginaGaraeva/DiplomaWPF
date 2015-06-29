@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FieldDataAnalyzerDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="final_gather_point_measurements">
+    <Key>
+      <PropertyRef Name="final_gather_point_measurement_id" />
+    </Key>
+    <Property Name="final_gather_point_measurement_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="measure_date" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="Pexper" Type="Single" Nullable="false" />
+    <Property Name="Texper" Type="Single" Nullable="false" />
+    <Property Name="coef_P" Type="Single" />
+    <Property Name="coef_T" Type="Single" />
+    <Property Name="Pcoef" Type="Single" />
+    <Property Name="Tcoef" Type="Single" />
+    <Property Name="Pf" Type="Single" />
+    <Property Name="Tf" Type="Single" />
+    <Property Name="coef_evaluations_id" Type="Int32" />
+    <NavigationProperty Name="coef_evaluations" Relationship="FieldDataAnalyzerDBModel.coef_evaluations_fk" FromRole="final_gather_point_measurements" ToRole="coef_evaluations" />
+    <NavigationProperty Name="gather_points_measurements" Relationship="FieldDataAnalyzerDBModel.final_gather_points_measurements_fk" FromRole="final_gather_point_measurements" ToRole="gather_points_measurements" />
+  </EntityType>
+  <EntityType Name="gather_points">
+    <Key>
+      <PropertyRef Name="gather_point_id" />
+    </Key>
+    <Property Name="gather_point_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="next_gather_point_id" Type="Int32" />
+    <NavigationProperty Name="wells" Relationship="Self.gather_point_fk" FromRole="gather_points" ToRole="wells" />
+    <NavigationProperty Name="gather_points_measurements" Relationship="Self.gather_point_measurement_fk" FromRole="gather_points" ToRole="gather_points_measurements" />
+    <NavigationProperty Name="pipes" Relationship="Self.gather_points_endnode_fk" FromRole="gather_points" ToRole="pipes" />
+    <NavigationProperty Name="pipes1" Relationship="Self.gather_points_startid_fk" FromRole="gather_points" ToRole="pipes" />
+    <NavigationProperty Name="gather_points1" Relationship="Self.next_gather_point_fk" FromRole="gather_points" ToRole="gather_points1" />
+    <NavigationProperty Name="gather_points2" Relationship="Self.next_gather_point_fk" FromRole="gather_points1" ToRole="gather_points" />
+  </EntityType>
+  <EntityType Name="gather_points_measurements">
+    <Key>
+      <PropertyRef Name="gather_points_measurement_id" />
+    </Key>
+    <Property Name="gather_points_measurement_id" Type="Int32" Nullable="false" />
+    <Property Name="measure_date" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="Pcoef" Type="Single" Nullable="false" />
+    <Property Name="Tcoef" Type="Single" Nullable="false" />
+    <Property Name="Pf" Type="Single" Nullable="false" />
+    <Property Name="Tf" Type="Single" Nullable="false" />
+    <Property Name="gather_point_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="gather_points" Relationship="Self.gather_point_measurement_fk" FromRole="gather_points_measurements" ToRole="gather_points" />
+    <Property Name="final_gather_points_measurements_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="final_gather_point_measurements" Relationship="FieldDataAnalyzerDBModel.final_gather_points_measurements_fk" FromRole="gather_points_measurements" ToRole="final_gather_point_measurements" />
+  </EntityType>
+  <EntityType Name="pipe">
+    <Key>
+      <PropertyRef Name="pipe_id" />
+    </Key>
+    <Property Name="pipe_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="length" Type="Single" Nullable="false" />
+    <Property Name="outer_d" Type="Single" Nullable="false" />
+    <Property Name="thickness" Type="Single" Nullable="false" />
+    <Property Name="inner_d" Type="Single" Nullable="false" />
+    <Property Name="roughness" Type="Single" Nullable="false" />
+    <Property Name="start_id" Type="Int32" Nullable="false" />
+    <Property Name="end_id" Type="Int32" Nullable="false" />
+    <Property Name="temper" Type="Single" Nullable="false" />
+    <NavigationProperty Name="gather_points" Relationship="Self.gather_points_endnode_fk" FromRole="pipes" ToRole="gather_points" />
+    <NavigationProperty Name="gather_points1" Relationship="Self.gather_points_startid_fk" FromRole="pipes" ToRole="gather_points" />
+  </EntityType>
+  <EntityType Name="well">
+    <Key>
+      <PropertyRef Name="well_id" />
+    </Key>
+    <Property Name="well_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="gather_point_id" Type="Int32" />
+    <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="a1" Type="Single" />
+    <Property Name="a2" Type="Single" />
+    <Property Name="a3" Type="Single" />
+    <Property Name="b1" Type="Single" />
+    <Property Name="b2" Type="Single" />
+    <Property Name="b3" Type="Single" />
+    <Property Name="Pkr" Type="Single" />
+    <Property Name="Gkr" Type="Single" />
+    <Property Name="T" Type="Single" />
+    <NavigationProperty Name="gather_points" Relationship="Self.gather_point_fk" FromRole="wells" ToRole="gather_points" />
+    <NavigationProperty Name="wells_measurements" Relationship="Self.well_measurements_fk" FromRole="wells" ToRole="wells_measurements" />
+    <NavigationProperty Name="shtutzers" Relationship="FieldDataAnalyzerDBModel.shtutzer_well_fk" FromRole="well" ToRole="shtutzer" />
+  </EntityType>
+  <EntityType Name="wells_measurements">
+    <Key>
+      <PropertyRef Name="measurement_id" />
+    </Key>
+    <Property Name="measurement_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="well_id" Type="Int32" Nullable="false" />
+    <Property Name="measure_date" Type="DateTime" Precision="0" Nullable="false" />
+    <Property Name="gas_output" Type="Single" Nullable="false" />
+    <Property Name="cond_output" Type="Single" Nullable="false" />
+    <Property Name="wellhead_P" Type="Single" Nullable="false" />
+    <Property Name="wellhead_T" Type="Single" Nullable="false" />
+    <Property Name="inlet_P" Type="Single" Nullable="false" />
+    <Property Name="inlet_T" Type="Single" Nullable="false" />
+    <NavigationProperty Name="well" Relationship="Self.well_measurements_fk" FromRole="wells_measurements" ToRole="wells" />
+  </EntityType>
+  <Association Name="gather_point_fk">
+    <End Role="gather_points" Type="Self.gather_points" Multiplicity="0..1" />
+    <End Role="wells" Type="Self.well" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gather_points">
+        <PropertyRef Name="gather_point_id" />
+      </Principal>
+      <Dependent Role="wells">
+        <PropertyRef Name="gather_point_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gather_point_measurement_fk">
+    <End Role="gather_points" Type="Self.gather_points" Multiplicity="1" />
+    <End Role="gather_points_measurements" Type="Self.gather_points_measurements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gather_points">
+        <PropertyRef Name="gather_point_id" />
+      </Principal>
+      <Dependent Role="gather_points_measurements">
+        <PropertyRef Name="gather_point_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gather_points_endnode_fk">
+    <End Role="gather_points" Type="Self.gather_points" Multiplicity="1" />
+    <End Role="pipes" Type="Self.pipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gather_points">
+        <PropertyRef Name="gather_point_id" />
+      </Principal>
+      <Dependent Role="pipes">
+        <PropertyRef Name="end_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="gather_points_startid_fk">
+    <End Role="gather_points" Type="Self.gather_points" Multiplicity="1" />
+    <End Role="pipes" Type="Self.pipe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gather_points">
+        <PropertyRef Name="gather_point_id" />
+      </Principal>
+      <Dependent Role="pipes">
+        <PropertyRef Name="start_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="next_gather_point_fk">
+    <End Role="gather_points" Type="Self.gather_points" Multiplicity="0..1" />
+    <End Role="gather_points1" Type="Self.gather_points" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="gather_points">
+        <PropertyRef Name="gather_point_id" />
+      </Principal>
+      <Dependent Role="gather_points1">
+        <PropertyRef Name="next_gather_point_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="well_measurements_fk">
+    <End Role="wells" Type="Self.well" Multiplicity="1" />
+    <End Role="wells_measurements" Type="Self.wells_measurements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="wells">
+        <PropertyRef Name="well_id" />
+      </Principal>
+      <Dependent Role="wells_measurements">
+        <PropertyRef Name="well_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FieldDataAnalyzerDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="final_gather_point_measurements" EntityType="Self.final_gather_point_measurements" />
+    <EntitySet Name="gather_points" EntityType="Self.gather_points" />
+    <EntitySet Name="gather_points_measurements" EntityType="Self.gather_points_measurements" />
+    <EntitySet Name="pipes" EntityType="Self.pipe" />
+    <EntitySet Name="wells" EntityType="Self.well" />
+    <EntitySet Name="wells_measurements" EntityType="Self.wells_measurements" />
+    <AssociationSet Name="gather_point_fk" Association="Self.gather_point_fk">
+      <End Role="gather_points" EntitySet="gather_points" />
+      <End Role="wells" EntitySet="wells" />
+    </AssociationSet>
+    <AssociationSet Name="gather_point_measurement_fk" Association="Self.gather_point_measurement_fk">
+      <End Role="gather_points" EntitySet="gather_points" />
+      <End Role="gather_points_measurements" EntitySet="gather_points_measurements" />
+    </AssociationSet>
+    <AssociationSet Name="gather_points_endnode_fk" Association="Self.gather_points_endnode_fk">
+      <End Role="gather_points" EntitySet="gather_points" />
+      <End Role="pipes" EntitySet="pipes" />
+    </AssociationSet>
+    <AssociationSet Name="gather_points_startid_fk" Association="Self.gather_points_startid_fk">
+      <End Role="gather_points" EntitySet="gather_points" />
+      <End Role="pipes" EntitySet="pipes" />
+    </AssociationSet>
+    <AssociationSet Name="next_gather_point_fk" Association="Self.next_gather_point_fk">
+      <End Role="gather_points" EntitySet="gather_points" />
+      <End Role="gather_points1" EntitySet="gather_points" />
+    </AssociationSet>
+    <AssociationSet Name="well_measurements_fk" Association="Self.well_measurements_fk">
+      <End Role="wells" EntitySet="wells" />
+      <End Role="wells_measurements" EntitySet="wells_measurements" />
+    </AssociationSet>
+    <EntitySet Name="shtutzers" EntityType="FieldDataAnalyzerDBModel.shtutzer" />
+    <AssociationSet Name="shtutzer_well_fk" Association="FieldDataAnalyzerDBModel.shtutzer_well_fk">
+      <End Role="well" EntitySet="wells" />
+      <End Role="shtutzer" EntitySet="shtutzers" />
+    </AssociationSet>
+    <EntitySet Name="coef_evaluations" EntityType="FieldDataAnalyzerDBModel.coef_evaluations" />
+    <AssociationSet Name="coef_evaluations_fk" Association="FieldDataAnalyzerDBModel.coef_evaluations_fk">
+      <End Role="coef_evaluations" EntitySet="coef_evaluations" />
+      <End Role="final_gather_point_measurements" EntitySet="final_gather_point_measurements" />
+    </AssociationSet>
+    <AssociationSet Name="final_gather_points_measurements_fk" Association="FieldDataAnalyzerDBModel.final_gather_points_measurements_fk">
+      <End Role="final_gather_point_measurements" EntitySet="final_gather_point_measurements" />
+      <End Role="gather_points_measurements" EntitySet="gather_points_measurements" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="shtutzer">
+    <Key>
+      <PropertyRef Name="shtutzer_id" />
+    </Key>
+    <Property Name="shtutzer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="well_id" Type="Int32" Nullable="false" />
+    <Property Name="d1" Type="Single" Nullable="false" />
+    <Property Name="d2" Type="Single" Nullable="false" />
+    <Property Name="d_sht_current" Type="Single" Nullable="false" />
+    <Property Name="M" Type="Single" Nullable="false" />
+    <Property Name="ro" Type="Single" Nullable="false" />
+    <Property Name="ro_g" Type="Single" Nullable="false" />
+    <Property Name="ro_l" Type="Single" Nullable="false" />
+    <Property Name="k" Type="Single" Nullable="false" />
+    <Property Name="C_l" Type="Single" Nullable="false" />
+    <Property Name="z" Type="Single" Nullable="false" />
+    <Property Name="D" Type="Single" Nullable="false" />
+    <NavigationProperty Name="well" Relationship="FieldDataAnalyzerDBModel.shtutzer_well_fk" FromRole="shtutzer" ToRole="well" />
+  </EntityType>
+  <Association Name="shtutzer_well_fk">
+    <End Type="FieldDataAnalyzerDBModel.well" Role="well" Multiplicity="1" />
+    <End Type="FieldDataAnalyzerDBModel.shtutzer" Role="shtutzer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="well">
+        <PropertyRef Name="well_id" />
+      </Principal>
+      <Dependent Role="shtutzer">
+        <PropertyRef Name="well_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="coef_evaluations">
+    <Key>
+      <PropertyRef Name="coef_evaluations_id" />
+    </Key>
+    <Property Name="coef_evaluations_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date_from" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_to" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Kt" Type="Single" Nullable="false" />
+    <Property Name="Kp" Type="Single" Nullable="false" />
+    <NavigationProperty Name="final_gather_point_measurements" Relationship="FieldDataAnalyzerDBModel.coef_evaluations_fk" FromRole="coef_evaluations" ToRole="final_gather_point_measurements" />
+  </EntityType>
+  <Association Name="coef_evaluations_fk">
+    <End Type="FieldDataAnalyzerDBModel.coef_evaluations" Role="coef_evaluations" Multiplicity="0..1" />
+    <End Type="FieldDataAnalyzerDBModel.final_gather_point_measurements" Role="final_gather_point_measurements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="coef_evaluations">
+        <PropertyRef Name="coef_evaluations_id" />
+      </Principal>
+      <Dependent Role="final_gather_point_measurements">
+        <PropertyRef Name="coef_evaluations_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="final_gather_points_measurements_fk">
+    <End Type="FieldDataAnalyzerDBModel.final_gather_point_measurements" Role="final_gather_point_measurements" Multiplicity="1" />
+    <End Type="FieldDataAnalyzerDBModel.gather_points_measurements" Role="gather_points_measurements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="final_gather_point_measurements">
+        <PropertyRef Name="final_gather_point_measurement_id" />
+      </Principal>
+      <Dependent Role="gather_points_measurements">
+        <PropertyRef Name="final_gather_points_measurements_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

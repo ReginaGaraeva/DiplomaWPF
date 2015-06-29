@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c2c41c0df9284e4cb0dd7dadfb3100bf" Name="Diagram1" ZoomLevel="63">
+        <EntityTypeShape EntityType="FieldDataAnalyzerDBModel.final_gather_point_measurements" Width="2.625" PointX="9.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FieldDataAnalyzerDBModel.gather_points" Width="1.5" PointX="4.875" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FieldDataAnalyzerDBModel.gather_points_measurements" Width="1.5" PointX="7.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FieldDataAnalyzerDBModel.pipe" Width="1.5" PointX="7.875" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FieldDataAnalyzerDBModel.well" Width="1.5" PointX="1.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FieldDataAnalyzerDBModel.wells_measurements" Width="1.5" PointX="3.75" PointY="3.875" IsExpanded="true" />
+        <AssociationConnector Association="FieldDataAnalyzerDBModel.gather_point_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="FieldDataAnalyzerDBModel.gather_point_measurement_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="FieldDataAnalyzerDBModel.gather_points_endnode_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="FieldDataAnalyzerDBModel.gather_points_startid_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="FieldDataAnalyzerDBModel.next_gather_point_fk" ManuallyRouted="false" />
+        <AssociationConnector Association="FieldDataAnalyzerDBModel.well_measurements_fk" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="FieldDataAnalyzerDBModel.shtutzer" Width="1.5" PointX="1" PointY="4.875" />
+        <AssociationConnector Association="FieldDataAnalyzerDBModel.shtutzer_well_fk" />
+        <EntityTypeShape EntityType="FieldDataAnalyzerDBModel.coef_evaluations" Width="1.5" PointX="10.625" PointY="4.625" />
+        <AssociationConnector Association="FieldDataAnalyzerDBModel.coef_evaluations_fk" />
+        <AssociationConnector Association="FieldDataAnalyzerDBModel.final_gather_points_measurements_fk" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

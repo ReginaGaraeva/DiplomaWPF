@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FieldDataAnalyzerDBModelStoreContainer" CdmEntityContainer="FieldDataAnalyzerDBEntities">
+    <EntitySetMapping Name="final_gather_point_measurements">
+      <EntityTypeMapping TypeName="FieldDataAnalyzerDBModel.final_gather_point_measurements">
+        <MappingFragment StoreEntitySet="final_gather_point_measurements">
+          <ScalarProperty Name="coef_evaluations_id" ColumnName="coef_evaluations_id" />
+          <ScalarProperty Name="final_gather_point_measurement_id" ColumnName="final_gather_point_measurement_id" />
+          <ScalarProperty Name="measure_date" ColumnName="measure_date" />
+          <ScalarProperty Name="Pexper" ColumnName="Pexper" />
+          <ScalarProperty Name="Texper" ColumnName="Texper" />
+          <ScalarProperty Name="coef_P" ColumnName="coef_P" />
+          <ScalarProperty Name="coef_T" ColumnName="coef_T" />
+          <ScalarProperty Name="Pcoef" ColumnName="Pcoef" />
+          <ScalarProperty Name="Tcoef" ColumnName="Tcoef" />
+          <ScalarProperty Name="Pf" ColumnName="Pf" />
+          <ScalarProperty Name="Tf" ColumnName="Tf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gather_points">
+      <EntityTypeMapping TypeName="FieldDataAnalyzerDBModel.gather_points">
+        <MappingFragment StoreEntitySet="gather_points">
+          <ScalarProperty Name="gather_point_id" ColumnName="gather_point_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="next_gather_point_id" ColumnName="next_gather_point_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="gather_points_measurements">
+      <EntityTypeMapping TypeName="FieldDataAnalyzerDBModel.gather_points_measurements">
+        <MappingFragment StoreEntitySet="gather_points_measurements">
+          <ScalarProperty Name="final_gather_points_measurements_id" ColumnName="final_gather_points_measurements_id" />
+          <ScalarProperty Name="gather_points_measurement_id" ColumnName="gather_points_measurement_id" />
+          <ScalarProperty Name="measure_date" ColumnName="measure_date" />
+          <ScalarProperty Name="Pcoef" ColumnName="Pcoef" />
+          <ScalarProperty Name="Tcoef" ColumnName="Tcoef" />
+          <ScalarProperty Name="Pf" ColumnName="Pf" />
+          <ScalarProperty Name="Tf" ColumnName="Tf" />
+          <ScalarProperty Name="gather_point_id" ColumnName="gather_point_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pipes">
+      <EntityTypeMapping TypeName="FieldDataAnalyzerDBModel.pipe">
+        <MappingFragment StoreEntitySet="pipes">
+          <ScalarProperty Name="pipe_id" ColumnName="pipe_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="length" ColumnName="length" />
+          <ScalarProperty Name="outer_d" ColumnName="outer_d" />
+          <ScalarProperty Name="thickness" ColumnName="thickness" />
+          <ScalarProperty Name="inner_d" ColumnName="inner_d" />
+          <ScalarProperty Name="roughness" ColumnName="roughness" />
+          <ScalarProperty Name="start_id" ColumnName="start_id" />
+          <ScalarProperty Name="end_id" ColumnName="end_id" />
+          <ScalarProperty Name="temper" ColumnName="temper" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="wells">
+      <EntityTypeMapping TypeName="FieldDataAnalyzerDBModel.well">
+        <MappingFragment StoreEntitySet="wells">
+          <ScalarProperty Name="well_id" ColumnName="well_id" />
+          <ScalarProperty Name="gather_point_id" ColumnName="gather_point_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="a1" ColumnName="a1" />
+          <ScalarProperty Name="a2" ColumnName="a2" />
+          <ScalarProperty Name="a3" ColumnName="a3" />
+          <ScalarProperty Name="b1" ColumnName="b1" />
+          <ScalarProperty Name="b2" ColumnName="b2" />
+          <ScalarProperty Name="b3" ColumnName="b3" />
+          <ScalarProperty Name="Pkr" ColumnName="Pkr" />
+          <ScalarProperty Name="Gkr" ColumnName="Gkr" />
+          <ScalarProperty Name="T" ColumnName="T" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="wells_measurements">
+      <EntityTypeMapping TypeName="FieldDataAnalyzerDBModel.wells_measurements">
+        <MappingFragment StoreEntitySet="wells_measurements">
+          <ScalarProperty Name="measurement_id" ColumnName="measurement_id" />
+          <ScalarProperty Name="well_id" ColumnName="well_id" />
+          <ScalarProperty Name="measure_date" ColumnName="measure_date" />
+          <ScalarProperty Name="gas_output" ColumnName="gas_output" />
+          <ScalarProperty Name="cond_output" ColumnName="cond_output" />
+          <ScalarProperty Name="wellhead_P" ColumnName="wellhead_P" />
+          <ScalarProperty Name="wellhead_T" ColumnName="wellhead_T" />
+          <ScalarProperty Name="inlet_P" ColumnName="inlet_P" />
+          <ScalarProperty Name="inlet_T" ColumnName="inlet_T" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="shtutzers">
+      <EntityTypeMapping TypeName="FieldDataAnalyzerDBModel.shtutzer">
+        <MappingFragment StoreEntitySet="shtutzers">
+          <ScalarProperty Name="D" ColumnName="D" />
+          <ScalarProperty Name="z" ColumnName="z" />
+          <ScalarProperty Name="C_l" ColumnName="C_l" />
+          <ScalarProperty Name="k" ColumnName="k" />
+          <ScalarProperty Name="ro_l" ColumnName="ro_l" />
+          <ScalarProperty Name="ro_g" ColumnName="ro_g" />
+          <ScalarProperty Name="ro" ColumnName="ro" />
+          <ScalarProperty Name="M" ColumnName="M" />
+          <ScalarProperty Name="d_sht_current" ColumnName="d_sht_current" />
+          <ScalarProperty Name="d2" ColumnName="d2" />
+          <ScalarProperty Name="d1" ColumnName="d1" />
+          <ScalarProperty Name="well_id" ColumnName="well_id" />
+          <ScalarProperty Name="shtutzer_id" ColumnName="shtutzer_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="coef_evaluations">
+      <EntityTypeMapping TypeName="FieldDataAnalyzerDBModel.coef_evaluations">
+        <MappingFragment StoreEntitySet="coef_evaluations">
+          <ScalarProperty Name="Kp" ColumnName="Kp" />
+          <ScalarProperty Name="Kt" ColumnName="Kt" />
+          <ScalarProperty Name="date_to" ColumnName="date_to" />
+          <ScalarProperty Name="date_from" ColumnName="date_from" />
+          <ScalarProperty Name="coef_evaluations_id" ColumnName="coef_evaluations_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,910 @@
+﻿<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>TomsToolbox.Desktop</name>
+  </assembly>
+  <members>
+    <member name="T:TomsToolbox.Desktop.AppDomainHelper">
+      <summary>
+            A helper to ease dealing with <see cref="T:System.AppDomain" /> specific tasks.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``1(System.Func{``0})">
+      <summary>
+            Invokes the specified function in a temporary separate domain.
+            </summary>
+      <typeparam name="T">Return type of the function.</typeparam>
+      <param name="func">The function.</param>
+      <returns>The result of the function.</returns>
+      <requires csharp="func != null" vb="func &lt;&gt; Nothing">func != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``2(System.Func{``0,``1},``0)">
+      <summary>
+            Invokes the specified function in a temporary separate domain.
+            </summary>
+      <typeparam name="TA1">The type of the a1.</typeparam>
+      <typeparam name="T">Return type of the function.</typeparam>
+      <param name="func">The function.</param>
+      <param name="arg1">The argument of the function.</param>
+      <returns>The result of the function.</returns>
+      <requires csharp="func != null" vb="func &lt;&gt; Nothing">func != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``3(System.Func{``0,``2},``0,``1)">
+      <summary>
+            Invokes the specified function in a temporary separate domain.
+            </summary>
+      <typeparam name="TA1">The type of the arguments.</typeparam>
+      <typeparam name="TA2">The type of the arguments.</typeparam>
+      <typeparam name="T">Return type of the function.</typeparam>
+      <param name="func">The function.</param>
+      <param name="arg1">The arguments of the function.</param>
+      <param name="arg2">The arguments of the function.</param>
+      <returns>The result of the function.</returns>
+      <requires csharp="func != null" vb="func &lt;&gt; Nothing">func != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``4(System.Func{``0,``3},``0,``1,``2)">
+      <summary>
+            Invokes the specified function in a temporary separate domain.
+            </summary>
+      <typeparam name="T">Return type of the function.</typeparam>
+      <typeparam name="TA1">The type of the arguments.</typeparam>
+      <typeparam name="TA2">The type of the arguments.</typeparam>
+      <typeparam name="TA3">The type of the arguments.</typeparam>
+      <param name="func">The function.</param>
+      <param name="arg1">The arguments of the function.</param>
+      <param name="arg2">The arguments of the function.</param>
+      <param name="arg3">The arguments of the function.</param>
+      <returns>The result of the function.</returns>
+      <requires csharp="func != null" vb="func &lt;&gt; Nothing">func != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.AppDomainHelper.InvokeInSeparateDomain``5(System.Func{``0,``4},``0,``1,``2,``3)">
+      <summary>
+            Invokes the specified function in a temporary separate domain.
+            </summary>
+      <typeparam name="T">Return type of the function.</typeparam>
+      <typeparam name="TA1">The type of the arguments.</typeparam>
+      <typeparam name="TA2">The type of the arguments.</typeparam>
+      <typeparam name="TA3">The type of the arguments.</typeparam>
+      <typeparam name="TA4">The type of the arguments.</typeparam>
+      <param name="func">The function.</param>
+      <param name="arg1">The arguments of the function.</param>
+      <param name="arg2">The arguments of the function.</param>
+      <param name="arg3">The arguments of the function.</param>
+      <param name="arg4">The arguments of the function.</param>
+      <returns>The result of the function.</returns>
+      <requires csharp="func != null" vb="func &lt;&gt; Nothing">func != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.AppDomainHelper.CreateInstanceAndUnwrap``1(System.AppDomain)">
+      <summary>
+            A wrapper for <see cref="M:System.AppDomain.CreateInstanceAndUnwrap(System.String,System.String)" /></summary>
+      <typeparam name="T">The type to create.</typeparam>
+      <param name="appDomain">The application domain.</param>
+      <returns>The proxy of the unwrapped type.</returns>
+      <requires csharp="appDomain != null" vb="appDomain &lt;&gt; Nothing">appDomain != null</requires>
+      <ensures csharp="(object)result != null" vb="((Object)result) &lt;&gt; Nothing">(object)result != null</ensures>
+    </member>
+    <member name="T:TomsToolbox.Desktop.Coordinates">
+      <summary>
+            WGS-84 coordinates in degrees.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.#ctor(System.Double,System.Double)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.Coordinates" /> structure.
+            </summary>
+      <param name="latitude">The latitude.</param>
+      <param name="longitude">The longitude.</param>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.op_Implicit(TomsToolbox.Desktop.Coordinates)~System.Windows.Point">
+      <summary>
+            Converts a point from WGS-84 coordinates (in degrees) into logical XY coordinates in the range 0..1.
+            </summary>
+      <param name="coordinates">The WGS-84 coordinates.</param>
+      <returns>The logical coordinates</returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.op_Implicit(System.Windows.Point)~TomsToolbox.Desktop.Coordinates">
+      <summary>
+            Converts a point from logical coordinates in the range 0..1 into latitude/longitude WGS-84 coordinates (in degrees).
+            </summary>
+      <param name="point">The logical coordinates.</param>
+      <returns>The WGS-84 coordinates</returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.CoordinatesToPoint(TomsToolbox.Desktop.Coordinates)">
+      <summary>
+            Converts a point from latitude/longitude WGS-84 coordinates (in degrees) into logical XY coordinates in the range 0..1
+            </summary>
+      <param name="coordinates">The coordinates.</param>
+      <returns>The logical point</returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.PointToCoordinates(System.Windows.Point)">
+      <summary>
+            Converts a point from logical coordinates in the range 0..1 into latitude/longitude WGS-84 coordinates (in degrees).
+            </summary>
+      <param name="value">The logical point value.</param>
+      <returns>The coordinates</returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.GetHashCode">
+      <summary>
+            Returns a hash code for this instance.
+            </summary>
+      <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.Equals(System.Object)">
+      <summary>
+            Determines whether the specified <see cref="T:System.Object" /> is equal to this instance.
+            </summary>
+      <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+      <returns>
+        <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.Equals(TomsToolbox.Desktop.Coordinates)">
+      <summary>
+            Determines whether the specified <see cref="T:TomsToolbox.Desktop.Coordinates" /> is equal to this instance.
+            </summary>
+      <param name="other">The <see cref="T:TomsToolbox.Desktop.Coordinates" /> to compare with this instance.</param>
+      <returns>
+        <c>true</c> if the specified <see cref="T:TomsToolbox.Desktop.Coordinates" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.op_Equality(TomsToolbox.Desktop.Coordinates,TomsToolbox.Desktop.Coordinates)">
+      <summary>
+            Implements the operator ==.
+            </summary>
+      <param name="left">The left object to compare.</param>
+      <param name="right">The right object to compare.</param>
+      <returns>
+            The result of the operator.
+            </returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.op_Inequality(TomsToolbox.Desktop.Coordinates,TomsToolbox.Desktop.Coordinates)">
+      <summary>
+            Implements the operator !=.
+            </summary>
+      <param name="left">The left object to compare.</param>
+      <param name="right">The right object to compare.</param>
+      <returns>
+            The result of the operator.
+            </returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Coordinates.ToString">
+      <summary>
+            Returns a <see cref="T:System.String" /> that represents this instance.
+            </summary>
+      <returns>
+            A <see cref="T:System.String" /> that represents this instance.
+            </returns>
+      <ensures inheritedFrom="M:System.ValueType.ToString" inheritedFromTypeName="ValueType" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      <ensures inheritedFrom="M:System.Object.ToString" inheritedFromTypeName="Object" csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="P:TomsToolbox.Desktop.Coordinates.Latitude">
+      <summary>
+            Gets or sets the latitude in degrees.
+            </summary>
+    </member>
+    <member name="P:TomsToolbox.Desktop.Coordinates.Longitude">
+      <summary>
+            Gets or sets the longitude in degrees.
+            </summary>
+    </member>
+    <member name="T:TomsToolbox.Desktop.CultureInfoExtensions">
+      <summary>
+            Extension methods for the <see cref="T:System.Globalization.CultureInfo" /> class.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.CultureInfoExtensions.GetAncestors(System.Globalization.CultureInfo)">
+      <summary>
+            Returns an enumeration of the ancestor elements of this element.
+            </summary>
+      <param name="self">The starting element.</param>
+      <returns>The ancestor list.</returns>
+      <requires csharp="self != null" vb="self &lt;&gt; Nothing">self != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.CultureInfoExtensions.GetAncestorsAndSelf(System.Globalization.CultureInfo)">
+      <summary>
+            Returns an enumeration of elements that contain this element, and the ancestors of this element.
+            </summary>
+      <param name="self">The starting element.</param>
+      <returns>The ancestor list.</returns>
+      <requires csharp="self != null" vb="self &lt;&gt; Nothing">self != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.CultureInfoExtensions.GetChildren(System.Globalization.CultureInfo)">
+      <summary>
+            Enumerates the immediate children of the specified item.
+            </summary>
+      <param name="item">The item.</param>
+      <returns>The immediate children of the specified item.</returns>
+      <requires csharp="item != null" vb="item &lt;&gt; Nothing">item != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.CultureInfoExtensions.GetDescendants(System.Globalization.CultureInfo)">
+      <summary>
+            Enumerates all descendants of the specified item.
+            </summary>
+      <param name="item">The item.</param>
+      <returns>The descendants of the item.</returns>
+      <requires csharp="item != null" vb="item &lt;&gt; Nothing">item != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="T:TomsToolbox.Desktop.DependencyObjectExtensions">
+      <summary>
+            Extension methods for the <see cref="T:System.Windows.DependencyObject" />.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DependencyObjectExtensions.GetValue``1(System.Windows.DependencyObject,System.Windows.DependencyProperty)">
+      <summary>
+            Gets the value of a dependency property using <see cref="M:TomsToolbox.Core.ObjectExtensions.SafeCast``1(System.Object)" />.
+            </summary>
+      <typeparam name="T" />
+      <param name="self">The dependency object from which to get the value.</param>
+      <param name="property">The property to get.</param>
+      <returns>The value safely casted to <typeparamref name="T" /></returns>
+      <requires csharp="self != null" vb="self &lt;&gt; Nothing">self != null</requires>
+      <requires csharp="property != null" vb="property &lt;&gt; Nothing">property != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DependencyObjectExtensions.Track``1(``0,System.Windows.DependencyProperty)">
+      <summary>
+            Tracks the changes of the specified property.
+            </summary>
+      <typeparam name="T">The type of the dependency object to track.</typeparam>
+      <param name="dependencyObject">The dependency object.</param>
+      <param name="property">The property to track.</param>
+      <returns>The object providing the changed event.</returns>
+      <requires csharp="(object)dependencyObject != null" vb="((Object)dependencyObject) &lt;&gt; Nothing">(object)dependencyObject != null</requires>
+      <requires csharp="property != null" vb="property &lt;&gt; Nothing">property != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="T:TomsToolbox.Desktop.DispatcherExtensions">
+      <summary>
+            Extension methods to ease usage of dispatcher calls.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherExtensions.Invoke``1(System.Windows.Threading.Dispatcher,System.Func{``0})">
+      <summary>
+            Invokes the specified method in the dispatcher thread.
+            </summary>
+      <typeparam name="T">The return type of the method.</typeparam>
+      <param name="dispatcher">The dispatcher.</param>
+      <param name="method">The method.</param>
+      <returns>The result of the method.</returns>
+      <remarks>Exceptions thrown by <paramref name="method" /> are passed back to the caller and are not wrapped into a <see cref="T:System.Reflection.TargetInvocationException" />.</remarks>
+      <requires csharp="method != null" vb="method &lt;&gt; Nothing">method != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherExtensions.Invoke(System.Windows.Threading.Dispatcher,System.Action)">
+      <summary>
+            Invokes the specified method in the dispatcher thread.
+            </summary>
+      <param name="dispatcher">The dispatcher.</param>
+      <param name="method">The method.</param>
+      <remarks>Exceptions thrown by <paramref name="method" /> are passed back to the caller and are not wrapped into a <see cref="T:System.Reflection.TargetInvocationException" />.</remarks>
+      <requires csharp="method != null" vb="method &lt;&gt; Nothing">method != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherExtensions.BeginInvoke(System.Windows.Threading.Dispatcher,System.Action)">
+      <summary>
+            Invokes the specified method asynchronously in the dispatcher thread.
+            </summary>
+      <param name="dispatcher">The dispatcher.</param>
+      <param name="method">The method.</param>
+      <returns>The dispatcher operation to track the outcome of the call.</returns>
+      <exception cref="T:System.InvalidOperationException">The dispatcher has already shut down.</exception>
+      <requires csharp="dispatcher != null" vb="dispatcher &lt;&gt; Nothing">dispatcher != null</requires>
+      <requires csharp="method != null" vb="method &lt;&gt; Nothing">method != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherExtensions.BeginInvoke(System.Windows.Threading.Dispatcher,System.Windows.Threading.DispatcherPriority,System.Action)">
+      <summary>
+            Invokes the specified method asynchronously in the dispatcher thread.
+            </summary>
+      <param name="dispatcher">The dispatcher.</param>
+      <param name="priority">The priority to use.</param>
+      <param name="method">The method.</param>
+      <returns>The dispatcher operation to track the outcome of the call.</returns>
+      <exception cref="T:System.InvalidOperationException">The dispatcher has already shut down.</exception>
+      <requires csharp="dispatcher != null" vb="dispatcher &lt;&gt; Nothing">dispatcher != null</requires>
+      <requires csharp="method != null" vb="method &lt;&gt; Nothing">method != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherExtensions.Restart(System.Windows.Threading.DispatcherTimer)">
+      <summary>
+            Restarts the specified timer.
+            </summary>
+      <param name="timer">The timer.</param>
+      <requires csharp="timer != null" vb="timer &lt;&gt; Nothing">timer != null</requires>
+    </member>
+    <member name="T:TomsToolbox.Desktop.Throttle">
+      <summary>
+            Implements a simple timed throttle.<para />
+            Calling <see cref="M:TomsToolbox.Desktop.Throttle.Tick" /> multiple times will restart the timer; there will be one single 
+            call to the action when the delay time has elapsed after the last tick.
+            </summary>
+      <invariant>_target != null</invariant>
+      <invariant>_timer != null</invariant>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Throttle.#ctor(System.Action)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.Throttle" /> class with a default timeout of 100ms.
+            </summary>
+      <param name="target">The target action to invoke when the throttle condition is hit.</param>
+      <requires csharp="target != null" vb="target &lt;&gt; Nothing">target != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Throttle.#ctor(System.TimeSpan,System.Action)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.Throttle" /> class.
+            </summary>
+      <param name="timeout">The timeout to wait for after the last <see cref="M:TomsToolbox.Desktop.Throttle.Tick" />.</param>
+      <param name="target">The target action to invoke when the throttle condition is hit.</param>
+      <requires csharp="target != null" vb="target &lt;&gt; Nothing">target != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.Throttle.Tick">
+      <summary>
+            Ticks this instance to trigger the throttle.
+            </summary>
+    </member>
+    <member name="T:TomsToolbox.Desktop.DispatcherThrottle">
+      <summary>
+            Implements a simple throttle that uses the dispatcher to delay the target action.<para />
+            Calling <see cref="M:TomsToolbox.Desktop.DispatcherThrottle.Tick" /> multiple times will result in on single call to the action as soon as 
+            the dispatcher of the thread that created the throttle is dispatching calls of the specified priority.
+            </summary>
+      <invariant>_target != null</invariant>
+      <invariant>_dispatcher != null</invariant>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherThrottle.#ctor(System.Action)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.DispatcherThrottle" /> class.
+            </summary>
+      <param name="target">The target action to invoke when the throttle condition is hit.</param>
+      <requires csharp="target != null" vb="target &lt;&gt; Nothing">target != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherThrottle.#ctor(System.Windows.Threading.DispatcherPriority,System.Action)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.DispatcherThrottle" /> class.
+            </summary>
+      <param name="priority">The priority of the dispatcher.</param>
+      <param name="target">The target action to invoke when the throttle condition is hit.</param>
+      <requires csharp="target != null" vb="target &lt;&gt; Nothing">target != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherThrottle.Tick">
+      <summary>
+            Ticks this instance to trigger the throttle.
+            </summary>
+    </member>
+    <member name="T:TomsToolbox.Desktop.ObservableObject">
+      <summary>
+            Base class implementing INotifyPropertyChanged.<para />
+            Supports declarative dependencies specified by the <see cref="T:TomsToolbox.Desktop.PropertyDependencyAttribute" /> and 
+            relaying events of other objects using the <see cref="T:TomsToolbox.Desktop.RelayedEventAttribute" />.
+            </summary>
+      <invariant>_dispatcher != null</invariant>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.RelayEventsOf(System.ComponentModel.INotifyPropertyChanged,System.ComponentModel.INotifyPropertyChanged)">
+      <summary>
+            Relays the property changed events of the source object (if not null) and detaches the old source (if not null). 
+            </summary>
+      <param name="oldSource" />
+      <param name="newSource" />
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.RelayEventsOf(System.ComponentModel.INotifyPropertyChanged)">
+      <summary>
+            Relays the property changed events of the source object.
+            The properties to relay must be declared with the <see cref="T:TomsToolbox.Desktop.RelayedEventAttribute" />.
+            </summary>
+      <param name="source">The source.</param>
+      <requires csharp="(() =&gt; {&#xD;&#xA;    {&#xD;&#xA;        TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass1 local_1 = new TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass1();&#xD;&#xA;    }&#xD;&#xA;    return source != null; })()" vb="(() =&gt; {&#xD;&#xA;    TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass1 local_1 = New TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass1();&#xD;&#xA;    return source &lt;&gt; Nothing; })()">(() =&gt; {
+    {
+        TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass1 local_1 = new TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass1();
+    }
+    return source != null; })()</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.DetachEventSources">
+      <summary>
+            Detaches all event sources.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.DetachEventSource(System.ComponentModel.INotifyPropertyChanged)">
+      <summary>
+            Detaches the event source.
+            </summary>
+      <param name="item">The item to detach.</param>
+      <requires csharp="item != null" vb="item &lt;&gt; Nothing">item != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.OnPropertyChanged``1(System.Linq.Expressions.Expression{System.Func{``0}})">
+      <summary>
+            Raises the <see cref="E:TomsToolbox.Desktop.ObservableObject.PropertyChanged" /> event for the property identified by the specified property expression.
+            </summary>
+      <typeparam name="T">The type of the property.</typeparam>
+      <param name="propertyExpression">The expression identifying the property.</param>
+      <requires csharp="propertyExpression != null" vb="propertyExpression &lt;&gt; Nothing">propertyExpression != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.SetProperty``1(``0@,``0,System.Linq.Expressions.Expression{System.Func{``0}})">
+      <summary>
+            Sets the property and raises the <see cref="E:TomsToolbox.Desktop.ObservableObject.PropertyChanged" /> event for the property identified by the specified property expression.
+            </summary>
+      <typeparam name="T">The type of the property.</typeparam>
+      <param name="backingField">The backing field for the property.</param>
+      <param name="value">The value.</param>
+      <param name="propertyExpression">The expression identifying the property.</param>
+      <returns>True if value has changed and the PropertyChange event was raised.</returns>
+      <requires csharp="propertyExpression != null" vb="propertyExpression &lt;&gt; Nothing">propertyExpression != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.SetProperty``1(``0@,``0,System.String)">
+      <summary>
+            Sets the property and raises the <see cref="E:TomsToolbox.Desktop.ObservableObject.PropertyChanged" /> event for the property identified by the specified property expression.
+            </summary>
+      <typeparam name="T">The type of the property.</typeparam>
+      <param name="backingField">The backing field for the property.</param>
+      <param name="value">The value.</param>
+      <param name="propertyName">Name of the property.</param>
+      <returns> True if value has changed and the PropertyChange event was raised. </returns>
+      <requires csharp="!IsNullOrEmpty(propertyName)" vb="Not IsNullOrEmpty(propertyName)">!string.IsNullOrEmpty(propertyName)</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.OnPropertyChanged(System.String)">
+      <summary>
+            Raises the <see cref="E:TomsToolbox.Desktop.ObservableObject.PropertyChanged" /> event for the property with the specified name.
+            </summary>
+      <param name="propertyName">Name of the property</param>
+      <requires csharp="!IsNullOrEmpty(propertyName)" vb="Not IsNullOrEmpty(propertyName)">!string.IsNullOrEmpty(propertyName)</requires>
+    </member>
+    <member name="P:TomsToolbox.Desktop.ObservableObject.Dispatcher">
+      <summary>
+            Gets the dispatcher of the thread where this object was created.
+            </summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="E:TomsToolbox.Desktop.ObservableObject.PropertyChanged">
+      <summary>
+            Occurs when a property value changes.
+            </summary>
+    </member>
+    <member name="T:TomsToolbox.Desktop.OtherExtensions">
+      <summary>
+            Various extension methods.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.OtherExtensions.GetCustomAttributes``1(System.Reflection.ICustomAttributeProvider,System.Boolean)">
+      <summary>
+            Returns a list of custom attributes identified by the type. <see cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Type,System.Boolean)" /></summary>
+      <typeparam name="T">The type of attributes to return.</typeparam>
+      <param name="self">The member info of the object to evaluate.</param>
+      <param name="inherit">Specifies whether to search this member's inheritance chain to find the attributes.</param>
+      <returns>An array of custom attributes applied to this member, or an array with zero (0) elements if no attributes have been applied.</returns>
+      <exception cref="T:System.TypeLoadException">A custom attribute type cannot be loaded</exception>
+      <exception cref="T:System.InvalidOperationException">This member belongs to a type that is loaded into the reflection-only context. See How to: Load Assemblies into the Reflection-Only Context.</exception>
+      <requires csharp="self != null" vb="self &lt;&gt; Nothing">self != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="T:TomsToolbox.Desktop.PropertyDependencyAttribute">
+      <summary>
+            Attribute to mark one property as dependent on another property. 
+            If you call <see cref="M:TomsToolbox.Desktop.ObservableObject.OnPropertyChanged(System.String)" /> for one property, the property change event will also be raised for all dependent properties. 
+            </summary>
+      <example>
+        <code language="C#"><![CDATA[
+            class X : ObservableObject
+            {
+                string Value { get { ... } }
+            
+                [PropertyDependency("Value")]
+                int ValueLength { get { ... } }
+            
+                void ChageSomething()
+                {
+                    OnPropertyChanged("Value"); 
+                }
+            }
+            ]]></code>
+            Calling 'OnPropertyChanged("Value")' will raise the PropertyChanged event for the "Value" property as well as for the dependent "ValueLength" property.
+            </example>
+      <invariant>_propertyNames != null</invariant>
+    </member>
+    <member name="M:TomsToolbox.Desktop.PropertyDependencyAttribute.#ctor(System.String[])">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.PropertyDependencyAttribute" /> class.
+            </summary>
+      <param name="propertyNames">The property names of the properties that this property depends on.</param>
+      <requires csharp="propertyNames != null" vb="propertyNames &lt;&gt; Nothing">propertyNames != null</requires>
+      <ensures csharp="this.PropertyNames == propertyNames" vb="Me.PropertyNames = propertyNames">this.PropertyNames == propertyNames</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.PropertyDependencyAttribute.CreateDependencyMapping(System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})">
+      <summary>
+            Creates the dependency mapping from the attributes of the specified properties.
+            </summary>
+      <param name="properties">The properties of the type.</param>
+      <returns>A dictionary that maps the property names to all direct and indirect dependent property names.</returns>
+      <exception cref="T:System.InvalidOperationException">Invalid dependency definitions, i.e. dependency to non-existing property.</exception>
+      <requires csharp="(() =&gt; {&#xD;&#xA;    {&#xD;&#xA;        TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClassf local_2 = new TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClassf();&#xD;&#xA;    }&#xD;&#xA;    return properties != null; })()" vb="(() =&gt; {&#xD;&#xA;    TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClassf local_2 = New TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClassf();&#xD;&#xA;    return properties &lt;&gt; Nothing; })()">(() =&gt; {
+    {
+        TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClassf local_2 = new TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClassf();
+    }
+    return properties != null; })()</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.PropertyDependencyAttribute.GetInvalidDependencies(System.Type)">
+      <summary>
+            Gets a list of invalid dependency definitions in the entry types assembly and all referenced assemblies.
+            </summary>
+      <param name="entryType">Type of the entry.</param>
+      <returns>A list of strings, each describing an invalid dependency definition. If no invalid definitions exist, the list is empty.</returns>
+      <remarks>This method is mainly for writing unit test to detect invalid dependencies during compile time.</remarks>
+      <requires csharp="entryType != (System.Type)null" vb="entryType &lt;&gt; ((System.Type)Nothing) ">entryType != (System.Type)null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.PropertyDependencyAttribute.GetCustomAssemblies(System.Type)">
+      <summary>
+            Gets the custom assemblies (i.e. assemblies in the same folder or sub-folder) referenced by the assembly of the specified type.
+            </summary>
+      <param name="entryType">A type contained in the entry assembly.</param>
+      <returns>The assembly that contains the entryType plus all custom assemblies that this assembly references.</returns>
+      <requires csharp="(() =&gt; {&#xD;&#xA;    {&#xD;&#xA;        TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass38 local_4 = new TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass38();&#xD;&#xA;    }&#xD;&#xA;    return entryType != (System.Type)null; })()" vb="(() =&gt; {&#xD;&#xA;    TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass38 local_4 = New TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass38();&#xD;&#xA;    return entryType &lt;&gt; ((System.Type)Nothing) ; })()">(() =&gt; {
+    {
+        TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass38 local_4 = new TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass38();
+    }
+    return entryType != (System.Type)null; })()</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.PropertyDependencyAttribute.IsAssemblyInSubfolderOf(System.Reflection.AssemblyName,System.String)">
+      <summary>
+            Determines whether the assembly is located in the same folder or a sub folder of the specified program folder.
+            </summary>
+      <param name="assemblyName">Name of the assembly.</param>
+      <param name="programFolder">The program folder.</param>
+      <returns>
+        <c>true</c> if the assembly is located in the same folder or a sub folder of the specified program folder; otherwise, <c>false</c>.
+            </returns>
+      <requires csharp="assemblyName != null" vb="assemblyName &lt;&gt; Nothing">assemblyName != null</requires>
+      <requires csharp="programFolder != null" vb="programFolder &lt;&gt; Nothing">programFolder != null</requires>
+    </member>
+    <member name="P:TomsToolbox.Desktop.PropertyDependencyAttribute.PropertyNames">
+      <summary>
+            Gets the names of the properties that the attributed property depends on.
+            </summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="T:TomsToolbox.Desktop.RelayedEventAttribute">
+      <summary>
+            Attribute to mark one property to relay the property changed events of another property from the governing class. 
+            If you call <see cref="M:TomsToolbox.Desktop.ObservableObject.OnPropertyChanged(System.String)" /> for a property of the governing class, 
+            the property change event will also be raised for the relayed property. 
+            </summary>
+      <example>
+        <code language="C#"><![CDATA[
+            class X : ObservableObject
+            {
+                Y _governingObject;
+            
+                public X(Y governingObject)
+                {
+                    _governingObject = governingObject;
+                    RelayEventsOf(_governingObject);
+                }
+            
+                [RelayedEvent(typeof(Y))]
+                string Value { get { return _governingObject.Value } }
+            
+                void ChageSomething()
+                {
+                    _governingObject.Value = "new Value"; 
+                }
+            }
+            ]]></code>
+            Changing 'Y.Value' will also raise the PropertyChanged event for the "X.Value" property.
+            </example>
+    </member>
+    <member name="M:TomsToolbox.Desktop.RelayedEventAttribute.#ctor(System.Type)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.RelayedEventAttribute" /> class.
+            </summary>
+      <param name="sourceType">Type of the source for the events.</param>
+    </member>
+    <member name="M:TomsToolbox.Desktop.RelayedEventAttribute.#ctor(System.Type,System.String)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.RelayedEventAttribute" /> class.
+            </summary>
+      <param name="sourceType">Type of the source for the events.</param>
+      <param name="sourceName">Name of the source property. You need to specify this only if the source property name is different.</param>
+    </member>
+    <member name="P:TomsToolbox.Desktop.RelayedEventAttribute.SourceType">
+      <summary>
+            Gets the type of the source for the events.
+            </summary>
+    </member>
+    <member name="P:TomsToolbox.Desktop.RelayedEventAttribute.SourceName">
+      <summary>
+            Gets the name of the source property, or null if the name is the same as the target property.
+            </summary>
+    </member>
+    <member name="T:TomsToolbox.Desktop.ForegroundThreadWithDispatcher">
+      <summary>
+            A dedicated thread hosting an active dispatcher.
+            The thread will be created as foreground thread, so this object must be explicitly disposed before the application can shut down.
+            </summary>
+      <remarks>
+            Use this thread to dispatch or serialize background operations, or to host COM objects that don't have a free threaded marshaller.
+            </remarks>
+    </member>
+    <member name="T:TomsToolbox.Desktop.ThreadWithDispatcher">
+      <summary>
+            A dedicated thread hosting an active dispatcher.
+            <para />
+            Creates a thread and starts a dispatcher in this thread. The dispatcher is only accessible after it's fully started.
+            </summary>
+      <invariant>_thread != null</invariant>
+      <invariant>_threadStarted != null</invariant>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState,System.Threading.ThreadPriority,System.Boolean)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.ThreadWithDispatcher" /> class.
+            </summary>
+      <param name="name">The name.</param>
+      <param name="state">The state.</param>
+      <param name="priority">The priority.</param>
+      <param name="isBackgroundThread">if set to <c>true</c> it the thread should be created as background thread.</param>
+      <requires csharp="!IsNullOrEmpty(name)" vb="Not IsNullOrEmpty(name)">!string.IsNullOrEmpty(name)</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.Invoke``1(System.Func{``0})">
+      <summary>
+            Invokes the specified method in the dispatcher thread.
+            </summary>
+      <typeparam name="T">The return type of the method.</typeparam>
+      <param name="method">The method.</param>
+      <returns>The result of the method.</returns>
+      <exception cref="T:System.InvalidOperationException">The dispatcher has already shut down.</exception>
+      <remarks>Exceptions thrown by <paramref name="method" /> are passed back to the caller and are not wrapped into a <see cref="T:System.Reflection.TargetInvocationException" />.</remarks>
+      <requires csharp="method != null" vb="method &lt;&gt; Nothing">method != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.Invoke(System.Action)">
+      <summary>
+            Invokes the specified method in the dispatcher thread.
+            </summary>
+      <param name="method">The method.</param>
+      <exception cref="T:System.InvalidOperationException">The dispatcher has already shut down.</exception>
+      <remarks>Exceptions thrown by <paramref name="method" /> are passed back to the caller and are not wrapped into a <see cref="T:System.Reflection.TargetInvocationException" />.</remarks>
+      <requires csharp="method != null" vb="method &lt;&gt; Nothing">method != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.BeginInvoke(System.Action)">
+      <summary>
+            Invokes the specified method asynchronously in the dispatcher thread.
+            </summary>
+      <param name="method">The method.</param>
+      <returns>The dispatcher operation to track the outcome of the call.</returns>
+      <exception cref="T:System.InvalidOperationException">The dispatcher has already shut down.</exception>
+      <requires csharp="method != null" vb="method &lt;&gt; Nothing">method != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority,System.Action)">
+      <summary>
+            Invokes the specified method asynchronously in the dispatcher thread.
+            </summary>
+      <param name="priority">The priority to use.</param>
+      <param name="method">The method.</param>
+      <returns>The dispatcher operation to track the outcome of the call.</returns>
+      <exception cref="T:System.InvalidOperationException">The dispatcher has already shut down.</exception>
+      <requires csharp="method != null" vb="method &lt;&gt; Nothing">method != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.VerifyAccess">
+      <summary>
+            Determines whether the calling thread has access to this <see cref="T:System.Windows.Threading.Dispatcher" />.
+            </summary>
+      <exception cref="T:System.InvalidOperationException">
+            The calling thread does not have access to this <see cref="T:System.Windows.Threading.Dispatcher" />.
+            </exception>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.CheckAccess">
+      <summary>
+            Determines whether the calling thread is the thread associated with this <see cref="T:System.Windows.Threading.Dispatcher" />.
+            </summary>
+      <returns>true if the calling thread is the thread associated with this <see cref="T:System.Windows.Threading.Dispatcher" />; otherwise, false.</returns>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.BeginShutdown">
+      <summary>
+            Initiates shutdown of the <see cref="T:System.Windows.Threading.Dispatcher" /> asynchronously.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ThreadWithDispatcher.Join">
+      <summary>
+            Blocks the calling thread until the <see cref="T:System.Windows.Threading.Dispatcher" /> terminates.
+            </summary>
+    </member>
+    <member name="P:TomsToolbox.Desktop.ThreadWithDispatcher.Dispatcher">
+      <summary>
+            Gets the dispatcher of the thread.
+            </summary>
+      <getter>
+        <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+      </getter>
+    </member>
+    <member name="E:TomsToolbox.Desktop.ThreadWithDispatcher.Terminated">
+      <summary>
+            Occurs when the dispatcher is terminated.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ForegroundThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.ForegroundThreadWithDispatcher" /> class.
+            </summary>
+      <param name="name">The name of the thread.</param>
+      <param name="state">The apartment state of the thread.</param>
+      <requires csharp="!IsNullOrEmpty(name)" vb="Not IsNullOrEmpty(name)">!string.IsNullOrEmpty(name)</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ForegroundThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState,System.Threading.ThreadPriority)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.ForegroundThreadWithDispatcher" /> class.
+            </summary>
+      <param name="name">The name of the thread.</param>
+      <param name="state">The apartment state of the thread.</param>
+      <param name="priority">The priority of the thread.</param>
+      <requires csharp="!IsNullOrEmpty(name)" vb="Not IsNullOrEmpty(name)">!string.IsNullOrEmpty(name)</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ForegroundThreadWithDispatcher.Dispose">
+      <summary>
+            Shut down the dispatcher and wait for the thread to terminate.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ForegroundThreadWithDispatcher.Finalize">
+      <summary>
+            Finalizes an instance of the <see cref="T:TomsToolbox.Desktop.ForegroundThreadWithDispatcher" /> class.
+            </summary>
+    </member>
+    <member name="T:TomsToolbox.Desktop.BackgroundThreadWithDispatcher">
+      <summary>
+            A dedicated thread hosting an active dispatcher.
+            The thread will be created as background thread, so it does not need to be shut down explicitly.
+            </summary>
+      <remarks>
+            Use this thread to dispatch or serialize background operations, or to performant host COM objects that don't have a free threaded marshaller.
+            A background thread will be killed by the system when the application terminates, so do not host objects in a background thread that need cleanup!
+            </remarks>
+    </member>
+    <member name="M:TomsToolbox.Desktop.BackgroundThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.BackgroundThreadWithDispatcher" /> class.
+            </summary>
+      <param name="name">The name of the thread.</param>
+      <param name="state">The apartment state of the thread.</param>
+      <requires csharp="!IsNullOrEmpty(name)" vb="Not IsNullOrEmpty(name)">!string.IsNullOrEmpty(name)</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.BackgroundThreadWithDispatcher.#ctor(System.String,System.Threading.ApartmentState,System.Threading.ThreadPriority)">
+      <summary>
+            Initializes a new instance of the <see cref="T:TomsToolbox.Desktop.BackgroundThreadWithDispatcher" /> class.
+            </summary>
+      <param name="name">The name of the thread.</param>
+      <param name="state">The apartment state of the thread.</param>
+      <param name="priority">The priority of the thread.</param>
+      <requires csharp="!IsNullOrEmpty(name)" vb="Not IsNullOrEmpty(name)">!string.IsNullOrEmpty(name)</requires>
+    </member>
+    <member name="T:TomsToolbox.Desktop.XmlExtensions">
+      <summary>
+            Extension methods for <see cref="N:System.Xml.Linq" /> objects.
+            </summary>
+    </member>
+    <member name="M:TomsToolbox.Desktop.XmlExtensions.GetAttribute(System.Xml.Linq.XElement,System.String)">
+      <summary>
+            Gets the attribute value of an XML element.
+            </summary>
+      <param name="element">The element.</param>
+      <param name="name">The name of the attribute.</param>
+      <returns>The value of the attribute, or <c>null</c> if no such attribute exists</returns>
+      <requires csharp="element != null" vb="element &lt;&gt; Nothing">element != null</requires>
+      <requires csharp="!IsNullOrEmpty(name)" vb="Not IsNullOrEmpty(name)">!string.IsNullOrEmpty(name)</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.XmlExtensions.GetAttribute(System.Xml.Linq.XElement,System.String,System.String)">
+      <summary>
+            Gets the attribute value of an XML element.
+            </summary>
+      <param name="element">The element.</param>
+      <param name="name">The name of the attribute.</param>
+      <param name="defaultValue">The default value.</param>
+      <returns>
+            The value of the attribute, or the <paramref name="defaultValue" /> if no such attribute exists
+            </returns>
+      <requires csharp="element != null" vb="element &lt;&gt; Nothing">element != null</requires>
+      <requires csharp="!IsNullOrEmpty(name)" vb="Not IsNullOrEmpty(name)">!string.IsNullOrEmpty(name)</requires>
+      <ensures csharp="defaultValue == default(string) || result != null" vb="defaultValue = Nothing OrElse result &lt;&gt; Nothing">defaultValue == default(string) || result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.XmlExtensions.GetAttribute(System.Xml.Linq.XElement,System.Xml.Linq.XName)">
+      <summary>
+            Gets the attribute value of an XML element.
+            </summary>
+      <param name="element">The element.</param>
+      <param name="name">The name of the attribute.</param>
+      <returns>The value of the attribute, or <c>null</c> if no such attribute exists</returns>
+      <requires csharp="element != null" vb="element &lt;&gt; Nothing">element != null</requires>
+      <requires csharp="name != (System.Xml.Linq.XName)null" vb="name &lt;&gt; ((System.Xml.Linq.XName)Nothing) ">name != (System.Xml.Linq.XName)null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.XmlExtensions.GetAttribute(System.Xml.Linq.XElement,System.Xml.Linq.XName,System.String)">
+      <summary>
+            Gets the attribute value of an XML element.
+            </summary>
+      <param name="element">The element.</param>
+      <param name="name">The name of the attribute.</param>
+      <param name="defaultValue">The default value.</param>
+      <returns>
+            The value of the attribute, or the <paramref name="defaultValue" /> if no such attribute exists
+            </returns>
+      <requires csharp="element != null" vb="element &lt;&gt; Nothing">element != null</requires>
+      <requires csharp="name != (System.Xml.Linq.XName)null" vb="name &lt;&gt; ((System.Xml.Linq.XName)Nothing) ">name != (System.Xml.Linq.XName)null</requires>
+      <ensures csharp="defaultValue == default(string) || result != null" vb="defaultValue = Nothing OrElse result &lt;&gt; Nothing">defaultValue == default(string) || result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherExtensions.InternalInvoke``1(System.Windows.Threading.Dispatcher,System.Func{``0})">
+      <requires csharp="method != null" vb="method &lt;&gt; Nothing">method != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherExtensions.InternalInvoke(System.Windows.Threading.Dispatcher,System.Delegate)">
+      <requires csharp="new TomsToolbox.Desktop.DispatcherExtensions.&lt;&gt;c__DisplayClass1(){&#xD;&#xA;    method = method, &#xD;&#xA;}.method != null" vb="(() =&gt; {&#xD;&#xA;    TomsToolbox.Desktop.DispatcherExtensions.&lt;&gt;c__DisplayClass1 local_2_prime = New TomsToolbox.Desktop.DispatcherExtensions.&lt;&gt;c__DisplayClass1();&#xD;&#xA;    (local_2_prime.method = method)&#xD;&#xA;    return local_2_prime; })().method &lt;&gt; Nothing">new TomsToolbox.Desktop.DispatcherExtensions.&lt;&gt;c__DisplayClass1(){
+    method = method, 
+}.method != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DispatcherExtensions.UnwrapTargetInvocation(System.Exception)">
+      <requires csharp="ex != null" vb="ex &lt;&gt; Nothing">ex != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.CultureInfoExtensions.CreateChildList(System.Globalization.CultureInfo)">
+      <ensures csharp="(() =&gt; {&#xD;&#xA;    {&#xD;&#xA;        new TomsToolbox.Desktop.CultureInfoExtensions.&lt;&gt;c__DisplayClass9().parent = parent;&#xD;&#xA;    }&#xD;&#xA;    return result != null; })()" vb="(() =&gt; {&#xD;&#xA;    New TomsToolbox.Desktop.CultureInfoExtensions.&lt;&gt;c__DisplayClass9().parent = parent&#xD;&#xA;    return result &lt;&gt; Nothing; })()">(() =&gt; {
+    {
+        new TomsToolbox.Desktop.CultureInfoExtensions.&lt;&gt;c__DisplayClass9().parent = parent;
+    }
+    return result != null; })()</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.PropertyDependencyAttribute.GetAllDependencies(System.String,System.Collections.Generic.IDictionary{System.String,System.String[]})">
+      <requires csharp="(() =&gt; {&#xD;&#xA;    {&#xD;&#xA;        System.Func&lt;string, bool&gt; local_1 = (System.Func&lt;string, bool&gt;)null;&#xD;&#xA;        TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass19 local_2 = new TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass19();&#xD;&#xA;    }&#xD;&#xA;    return item != null; })()" vb="(() =&gt; {&#xD;&#xA;    System.Func&lt;string, bool&gt; local_1 = ((System.Func(Of String, Boolean))Nothing);&#xD;&#xA;    TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass19 local_2 = New TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass19();&#xD;&#xA;    return item &lt;&gt; Nothing; })()">(() =&gt; {
+    {
+        System.Func&lt;string, bool&gt; local_1 = (System.Func&lt;string, bool&gt;)null;
+        TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass19 local_2 = new TomsToolbox.Desktop.PropertyDependencyAttribute.&lt;&gt;c__DisplayClass19();
+    }
+    return item != null; })()</requires>
+      <requires csharp="directDependencies != null" vb="directDependencies &lt;&gt; Nothing">directDependencies != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.PropertyDependencyAttribute.SafeGetTypes(System.Reflection.Assembly)">
+      <requires csharp="a != (System.Reflection.Assembly)null" vb="a &lt;&gt; ((System.Reflection.Assembly)Nothing) ">a != (System.Reflection.Assembly)null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.AppDomainHelper.InternalInvokeInSeparateDomain``1(System.Delegate,System.Object[])">
+      <requires csharp="func != null" vb="func &lt;&gt; Nothing">func != null</requires>
+      <requires csharp="args != null" vb="args &lt;&gt; Nothing">args != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.AppDomainHelper.DomainHelper.Invoke(System.Reflection.MethodInfo,System.Object,System.Object[])">
+      <requires csharp="method != (System.Reflection.MethodInfo)null" vb="method &lt;&gt; ((System.Reflection.MethodInfo)Nothing) ">method != (System.Reflection.MethodInfo)null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.RelayedEventAttribute.CreateRelayMapping(System.Collections.Generic.IEnumerable{System.Reflection.PropertyInfo})">
+      <requires csharp="properties != null" vb="properties &lt;&gt; Nothing">properties != null</requires>
+      <ensures csharp="result != null" vb="result &lt;&gt; Nothing">result != null</ensures>
+    </member>
+    <member name="M:TomsToolbox.Desktop.RelayedEventAttribute.AreAllPropertiesValid(System.Type,System.Collections.Generic.IEnumerable{System.String})">
+      <requires csharp="(() =&gt; {&#xD;&#xA;    {&#xD;&#xA;        TomsToolbox.Desktop.RelayedEventAttribute.&lt;&gt;c__DisplayClass17 local_2 = new TomsToolbox.Desktop.RelayedEventAttribute.&lt;&gt;c__DisplayClass17();&#xD;&#xA;    }&#xD;&#xA;    return sourceType != (System.Type)null; })()" vb="(() =&gt; {&#xD;&#xA;    TomsToolbox.Desktop.RelayedEventAttribute.&lt;&gt;c__DisplayClass17 local_2 = New TomsToolbox.Desktop.RelayedEventAttribute.&lt;&gt;c__DisplayClass17();&#xD;&#xA;    return sourceType &lt;&gt; ((System.Type)Nothing) ; })()">(() =&gt; {
+    {
+        TomsToolbox.Desktop.RelayedEventAttribute.&lt;&gt;c__DisplayClass17 local_2 = new TomsToolbox.Desktop.RelayedEventAttribute.&lt;&gt;c__DisplayClass17();
+    }
+    return sourceType != (System.Type)null; })()</requires>
+      <requires csharp="propertyNames != null" vb="propertyNames &lt;&gt; Nothing">propertyNames != null</requires>
+    </member>
+    <member name="T:TomsToolbox.Desktop.DependencyObjectExtensions.DependencyPropertyEventWrapper`1">
+      <invariant>_dependencyObject != null</invariant>
+      <invariant>_dependencyPropertyDescriptor != null</invariant>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DependencyObjectExtensions.DependencyPropertyEventWrapper`1.#ctor(`0,System.Windows.DependencyProperty)">
+      <requires csharp="(object)dependencyObject != null" vb="((Object)dependencyObject) &lt;&gt; Nothing">(object)dependencyObject != null</requires>
+      <requires csharp="property != null" vb="property &lt;&gt; Nothing">property != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DependencyObjectExtensions.DependencyPropertyEventWrapper`1.add_Changed(System.EventHandler)">
+      <requires inheritedFrom="M:TomsToolbox.Core.INotifyChanged.add_Changed(System.EventHandler)" inheritedFromTypeName="INotifyChanged" csharp="value != null" vb="value &lt;&gt; Nothing">value != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.DependencyObjectExtensions.DependencyPropertyEventWrapper`1.remove_Changed(System.EventHandler)">
+      <requires inheritedFrom="M:TomsToolbox.Core.INotifyChanged.remove_Changed(System.EventHandler)" inheritedFromTypeName="INotifyChanged" csharp="value != null" vb="value &lt;&gt; Nothing">value != null</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.RelaySource_PropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)">
+      <requires csharp="(() =&gt; {&#xD;&#xA;    {&#xD;&#xA;        TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass6 local_1 = new TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass6();&#xD;&#xA;    }&#xD;&#xA;    return sender != null; })()" vb="(() =&gt; {&#xD;&#xA;    TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass6 local_1 = New TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass6();&#xD;&#xA;    return sender &lt;&gt; Nothing; })()">(() =&gt; {
+    {
+        TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass6 local_1 = new TomsToolbox.Desktop.ObservableObject.&lt;&gt;c__DisplayClass6();
+    }
+    return sender != null; })()</requires>
+    </member>
+    <member name="M:TomsToolbox.Desktop.ObservableObject.InternalOnPropertyChanged(System.String)">
+      <requires csharp="!IsNullOrEmpty(propertyName)" vb="Not IsNullOrEmpty(propertyName)">!string.IsNullOrEmpty(propertyName)</requires>
+    </member>
+  </members>
+</doc>

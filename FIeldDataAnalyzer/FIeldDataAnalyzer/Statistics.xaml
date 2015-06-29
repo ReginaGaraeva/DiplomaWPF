@@ -1,0 +1,67 @@
+﻿<Window x:Class="FIeldDataAnalyzer.Statistics"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"      
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        xmlns:wfi="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        xmlns:dvc="clr-namespace:System.Windows.Forms.DataVisualization.Charting;assembly=System.Windows.Forms.DataVisualization"
+        Title="Статистика" Height="490.202" Width="963" Loaded="Window_Loaded_1">
+    <Grid>
+        <TabControl TabStripPlacement="Left" >
+            <TabItem Header="Скважины">
+                <Grid Background="#FFE5E5E5">
+                    <TabControl >
+                        <TabItem Header="Статистика измерений по скважине">
+                            <Grid Background="#FFE5E5E5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20*"/>
+                                    <RowDefinition Height="161*"/>
+                                </Grid.RowDefinitions>
+                                <Grid  Grid.Row="1" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="582*"/>
+                                        <ColumnDefinition Width="209*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <WindowsFormsHost>
+                                        <dvc:Chart x:Name="wellChart" />
+                                    </WindowsFormsHost>
+                                   
+                                    <Label Content="Отображать:" HorizontalAlignment="Left" Margin="20,26,0,0" Grid.Column="1" VerticalAlignment="Top" />
+                                    <CheckBox x:Name="T1CheckBox" Content="Температура до штуцера (T1)" HorizontalAlignment="Left" Margin="20,72,0,0" Grid.Column="1" VerticalAlignment="Top" IsChecked="True" Checked="T1CheckBox_Checked" Unchecked="T1CheckBox_Unchecked"/>
+                                    <CheckBox x:Name="T2CheckBox" Content="Температура после штуцера (T2)" HorizontalAlignment="Left" Margin="20,100,0,0" Grid.Column="1" VerticalAlignment="Top" Unchecked="T2CheckBox_Unchecked" Checked="T2CheckBox_Checked"/>
+                                    <CheckBox x:Name="P1CheckBox" Content="Давление до штуцера (P1)" HorizontalAlignment="Left" Margin="20,130,0,0" Grid.Column="1" VerticalAlignment="Top" Unchecked="P1CheckBox_Unchecked" Checked="P1CheckBox_Checked"/>
+                                    <CheckBox x:Name="P2CheckBox" Content="Давление после штуцера (P2)" HorizontalAlignment="Left" Margin="20,160,0,0" Grid.Column="1" VerticalAlignment="Top" Unchecked="P2CheckBox_Unchecked" Checked="P2CheckBox_Checked"/>
+                                    <CheckBox x:Name="GCheckBox" Content="Массовый расход (G)" HorizontalAlignment="Left" Margin="20,190,0,0" Grid.Column="1" VerticalAlignment="Top" Unchecked="GCheckBox_Unchecked" Checked="GCheckBox_Checked"/>
+                                </Grid>
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="344*"/>
+                                        <ColumnDefinition Width="447*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Content="Выберите скважину" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Center" Width="119"/>
+                                    <ComboBox x:Name="wellsComboBox" HorizontalAlignment="Left" Margin="151,12,0,13" VerticalAlignment="Center" Width="147" SelectionChanged="wellsComboBox_SelectionChanged"/>
+                                </Grid>
+                                <Label Content="Даты с" HorizontalAlignment="Left" Margin="419,10,0,11" VerticalAlignment="Center"/>
+                                <DatePicker HorizontalAlignment="Left" Margin="471,11,0,12" VerticalAlignment="Center" Width="126"/>
+                                <Label Content="по" HorizontalAlignment="Left" Margin="597,10,0,11" VerticalAlignment="Center"/>
+                                <DatePicker HorizontalAlignment="Left" Margin="627,11,0,12" VerticalAlignment="Center" Width="126"/>
+                                <Button Content="?" HorizontalAlignment="Left" Margin="314,13,0,14" VerticalAlignment="Center" Width="20"/>
+                                <CheckBox Content="Все данные" HorizontalAlignment="Left" Margin="761,16,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.565,0.822"/>
+
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Сравнительная статистика по скважинам">
+                            <Grid Background="#FFE5E5E5"/>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </TabItem>
+            <TabItem Header="УКПГ">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Оптимизация">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
