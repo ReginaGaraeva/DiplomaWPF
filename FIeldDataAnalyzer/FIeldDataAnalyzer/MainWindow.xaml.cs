@@ -140,35 +140,57 @@ namespace FIeldDataAnalyzer
 				graph.wells.Where(m => m.Data.gas_output != 0).Sum(x => x.Gg));
 		}
 
+		//double F(double[] x)
+		//{
+		//	maxKGFWell.Shtutzer.d_sht_current = (float)x[0];
+		//	min1KGFWell.Shtutzer.d_sht_current = (float)x[1];
+		//	min2KGFWell.Shtutzer.d_sht_current = (float)x[2];
+		//	evaluator.CalcGraph(optimizationDate);
+
+		//	return -(graph.wells.Sum(m => m.Gl) / graph.wells.Sum(m => m.Gg) -
+		//		   (alpha1 * Math.Abs(graph.endNode.P - Psb) + alpha2 * Math.Abs(graph.endNode.G - Gsb)));
+		//	//return (x[0] + 10)*(x[0] + 10) + x[1]*x[1] + x[2]*x[2];
+		//}
+
 		private void startOptimizationButton_Click(object sender, RoutedEventArgs e)
 		{
 			FieldDataAnalyzerDBEntities entities = new FieldDataAnalyzerDBEntities();
-			Optimizer optimizer = new Optimizer(graph);
-			if (!entities.wells_measurements.Any(x => x.measure_date == optimizeDatePicker.DisplayDate))
-				optimizeDatePicker.DisplayDate = entities.wells_measurements.Max(x => x.measure_date);
-			var date = entities.wells_measurements.Join(entities.final_gather_point_measurements, x => x.measure_date, y => y.measure_date,
-				(x, y) => new { Date1 = x.measure_date, Date2 = y.measure_date }).First(m => (m.Date1 != null) && (m.Date2 != null));
+
+			//OptimizerContext optimizer = new OptimizerContext(new Gradient(delegate(double[] x)
+			//{
+			//	return (x[0] + 10) * (x[0] + 10) + x[1] * x[1] + x[2] * x[2] + x[3] * x[3];
+			//}, 4));
+			//double[] res = optimizer.Run(0.001, new[] {5.0, -7.0, 9.6, -1});
+
+			ShtutzerOptimizer optimizer = new ShtutzerOptimizer(graph);
+			double[] res = optimizer.Run(Convert.ToDateTime("1.10.2010"));
+
+			//Optimizer optimizer = new Optimizer(graph);
+			//if (!entities.wells_measurements.Any(x => x.measure_date == optimizeDatePicker.DisplayDate))
+			//	optimizeDatePicker.DisplayDate = entities.wells_measurements.Max(x => x.measure_date);
+			//var date = entities.wells_measurements.Join(entities.final_gather_point_measurements, x => x.measure_date, y => y.measure_date,
+			//	(x, y) => new { Date1 = x.measure_date, Date2 = y.measure_date }).First(m => (m.Date1 != null) && (m.Date2 != null));
 
 
-			double[] res = optimizer.Calc(date.Date1);
+			//double[] res = optimizer.Calc(date.Date1);
 
-			optimizer.maxKGFWell.Shtutzer.d_sht_current = (float)res[0];
-			optimizer.min1KGFWell.Shtutzer.d_sht_current = (float)res[1];
-			optimizer.min2KGFWell.Shtutzer.d_sht_current = (float)res[2];
+			//optimizer.maxKGFWell.Shtutzer.d_sht_current = (float)res[0];
+			//optimizer.min1KGFWell.Shtutzer.d_sht_current = (float)res[1];
+			//optimizer.min2KGFWell.Shtutzer.d_sht_current = (float)res[2];
 
-			var lol =
-				graph.wells.Where(
-					x =>
-						x.Data.well_id == optimizer.maxKGFWell.Data.well_id || x.Data.well_id == optimizer.min1KGFWell.Data.well_id ||
-						x.Data.well_id == optimizer.min2KGFWell.Data.well_id).ToList();
-			optValuesDataGrid.ItemsSource = lol.Select(x => new
-			{
-				x.Name,
-				d_sht_old = x.d_sht,
-				d_sht_new = x.Shtutzer.d_sht_current
-			});
+			//var lol =
+			//	graph.wells.Where(
+			//		x =>
+			//			x.Data.well_id == optimizer.maxKGFWell.Data.well_id || x.Data.well_id == optimizer.min1KGFWell.Data.well_id ||
+			//			x.Data.well_id == optimizer.min2KGFWell.Data.well_id).ToList();
+			//optValuesDataGrid.ItemsSource = lol.Select(x => new
+			//{
+			//	x.Name,
+			//	d_sht_old = x.d_sht,
+			//	d_sht_new = x.Shtutzer.d_sht_current
+			//});
 
-			double fieldKGF = graph.wells.Sum(m => m.Gl) / graph.wells.Sum(m => m.Gg);
+			//double fieldKGF = graph.wells.Sum(m => m.Gl) / graph.wells.Sum(m => m.Gg);
 
 			//Random rnd = new Random();
 			//double[] d_shts = { 0.06d, 0.08d, 0.10d, 0.12d, 0.14d };

@@ -272,9 +272,11 @@ namespace FieldDataAnalyzer
 
 		public void CalcShtutzer(WellData well)
 		{
-			if (well.Name == "20503")
+			if (well.Shtutzer.d_sht_current <= 0)
 			{
-				double a = 3;
+				well.Gl = 0;
+				well.Gg = 0;
+				return;
 			}
 			float G = (well.Data.cond_output + well.Data.gas_output);
 			well.Gl = well.Data.cond_output * (1 - well.Shtutzer.d_sht_current*1.5);

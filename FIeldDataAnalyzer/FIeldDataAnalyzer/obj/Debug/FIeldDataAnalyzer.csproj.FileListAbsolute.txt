@@ -53,3 +53,4 @@ K:\GitHub\DiplomaWPF\FIeldDataAnalyzer\FIeldDataAnalyzer\obj\Debug\FIeldDataAnal
 K:\GitHub\DiplomaWPF\FIeldDataAnalyzer\FIeldDataAnalyzer\obj\Debug\FIeldDataAnalyzer.csproj.GenerateResource.Cache
 K:\GitHub\DiplomaWPF\FIeldDataAnalyzer\FIeldDataAnalyzer\obj\Debug\FIeldDataAnalyzer.exe
 K:\GitHub\DiplomaWPF\FIeldDataAnalyzer\FIeldDataAnalyzer\obj\Debug\FIeldDataAnalyzer.pdb
+K:\GitHub\DiplomaWPF\FIeldDataAnalyzer\FIeldDataAnalyzer\obj\Debug\FIeldDataAnalyzer.csprojResolveAssemblyReference.cache
